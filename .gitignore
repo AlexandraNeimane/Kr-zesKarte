@@ -1,0 +1,6 @@
+node_modules/
+# runtime data: sessions, submitted reports, notification log, address cache
+data/app.db
+data/app.db-*
+*.log
+.DS_Store

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="lv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sistēmas panelis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px; display: flex; flex-direction: column; gap: 18px; }
+    .card { padding: 20px; }
+    h1 { margin: 0; font-size: 28px; } h2 { margin: 0 0 12px; font-size: 20px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; background: #f6f4fb; }
+    .ok { color: var(--green-600); font-weight: 800; } .bad { color: var(--red); font-weight: 800; }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .row input, .row select { font: inherit; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); }
+    .btn { border: 0; border-radius: 12px; padding: 11px 16px; font-weight: 700; color: #fff; background: var(--purple); }
+    .btn.green { background: var(--green-600); } .btn.red { background: var(--red); }
+    .muted { color: var(--muted); font-size: 14px; }
+    .alert-card { border-left: 6px solid var(--red); background: #fff5f6; border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; }
+    .alert-card b { color: var(--red); }
+    a { color: var(--purple); font-weight: 700; }
+    code { background: var(--purple-50); padding: 2px 6px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="row" style="justify-content:space-between">
+    <h1>Sistēmas panelis</h1>
+    <a href="/">← Uz karti</a>
+  </div>
+
+  <section class="card">
+    <h2>📞 Automātiskie paziņojumi glābšanas dienestam (<span id="phone"></span>)</h2>
+    <p class="muted">Kad <b id="thr"></b> vienāda veida iedzīvotāju ziņojumi sakrīt <b id="rad"></b> m rādiusā (24 h laikā), sistēma automātiski nosūta paziņojumu.
+      Prototipā nosūtīšana tiek simulēta un reģistrēta šeit; reālam SMS/zvana servisam iestatiet <code>NOTIFY_WEBHOOK_URL</code>.</p>
+    <div id="notifs"></div>
+  </section>
+
+  <section class="card">
+    <h2>🧪 Demonstrācija: simulēt ziņojumu kopu</h2>
+    <p class="muted">Izveido N demo ziņojumus ~150 m rādiusā ap izvēlēto punktu. Ar 24 ziņojumiem jūsu nākamais (25.) īstais ziņojums tajā pašā vietā iedarbinās paziņojumu.</p>
+    <form id="loginForm" class="row">
+      <input name="username" placeholder="Lietotājvārds" autocomplete="username">
+      <input name="password" type="password" placeholder="Parole" autocomplete="current-password">
+      <button class="btn">Pieslēgties</button><span id="who" class="muted"></span>
+    </form>
+    <div class="row" style="margin-top:12px">
+      <select id="type"></select>
+      <input id="lat" size="10" placeholder="lat"> <input id="lon" size="10" placeholder="lon">
+      <button class="btn" type="button" id="here">📍 Mana vieta</button>
+      <input id="count" type="number" value="24" min="1" max="100" style="width:80px">
+      <button class="btn green" type="button" id="sim">Simulēt</button>
+      <button class="btn red" type="button" id="reset">Notīrīt demo datus</button>
+    </div>
+    <p id="simOut" class="muted"></p>
+  </section>
+
+  <section class="card">
+    <h2>🔌 Datu avoti</h2>
+    <table><thead><tr><th>Avots</th><th>Statuss</th><th>Ieraksti</th><th>Atjaunots</th><th>Biežums</th></tr></thead><tbody id="src"></tbody></table>
+    <p class="muted">Aizliegto vārdu saraksti: <span id="prof"></span> — <code>data/profanity/</code> (LDNOOBW EN/RU + LV saraksts).</p>
+  </section>
+</div>
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+let token = sessionStorage.getItem('token');
+const api = async (p, o = {}) => {
+  const r = await fetch(p, { ...o, headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: 'Bearer ' + token } : {}) }, body: o.body && JSON.stringify(o.body) });
+  const j = await r.json(); if (!r.ok) throw Object.assign(new Error(j.error), { j }); return j;
+};
+const NAMES = {
+  lvgmc_warnings: ['LVĢMC brīdinājumi (CAP)', 'https://bridinajumi.meteo.lv/', '5 min'],
+  lvc_events: ['LVC ceļu notikumi (Nacionālais piekļuves punkts)', 'https://map.transportdata.gov.lv/', '5 min'],
+  lvgmc_forecast: ['LVĢMC prognozes apdzīvotām vietām', 'https://data.gov.lv/dati/lv/dataset/meteorologiskas-prognozes-apdzivotam-vietam-jaunaka-datu-kopa', '30 min'],
+  lvgmc_hydro: ['LVĢMC hidroloģiskās prognozes', 'https://data.gov.lv/dati/lv/dataset/hidrologiskas-prognozes', '30 min'],
+};
+async function refresh() {
+  const [cfg, st, n] = await Promise.all([api('/api/config'), api('/api/status'), api('/api/notifications')]);
+  $('#phone').textContent = cfg.emergencyPhone; $('#thr').textContent = cfg.clusterThreshold; $('#rad').textContent = cfg.clusterRadiusM;
+  if (!$('#type').options.length) $('#type').innerHTML = Object.entries(cfg.reportTypes).map(([k, v]) => `<option value="${k}">${v.lv}</option>`).join('');
+  $('#src').innerHTML = Object.entries(NAMES).map(([k, [name, url, freq]]) => {
+    const s = st.sources[k] || {};
+    return `<tr><td><a href="${url}" target="_blank" rel="noopener">${name}</a></td><td class="${s.ok ? 'ok' : 'bad'}">${s.ok ? 'OK' : esc(s.error || 'ielādē…')}</td><td>${esc(s.count ?? '')}</td><td>${s.updated ? new Date(s.updated).toLocaleString('lv-LV') : ''}</td><td>${freq}</td></tr>`;
+  }).join('') + `<tr><td>Nokrišņu radars (RainViewer)</td><td class="ok">pārlūkā</td><td></td><td></td><td>10 min</td></tr>
+    <tr><td>Adreses (OpenStreetMap Nominatim)</td><td class="ok">pēc pieprasījuma</td><td></td><td></td><td>kešots</td></tr>`;
+  $('#prof').textContent = `${st.profanity.words} vārdi (${st.profanity.files.join(', ')})`;
+  $('#notifs').innerHTML = n.notifications.length ? n.notifications.map(x => `<div class="alert-card">
+      <b>→ ${esc(x.phone)}</b> · ${new Date(x.created_at).toLocaleString('lv-LV')} · ${esc(x.report_count)} ziņojumi · statuss: <b>${esc(x.status)}</b><br>${esc(x.message)}</div>`).join('')
+    : '<p class="muted">Pagaidām nav nosūtītu paziņojumu.</p>';
+}
+async function me() {
+  if (!token) return ($('#who').textContent = 'Nav pieslēdzies');
+  try { $('#who').textContent = 'Pieslēdzies: ' + (await api('/api/me')).user.username; } catch { token = null; $('#who').textContent = 'Nav pieslēdzies'; }
+}
+$('#loginForm').onsubmit = async e => {
+  e.preventDefault(); const f = new FormData(e.target);
+  try { const r = await api('/api/login', { method: 'POST', body: { username: f.get('username'), password: f.get('password') } });
+    token = r.token; sessionStorage.setItem('token', token); me(); } catch { $('#who').textContent = 'Nepareizi dati'; }
+};
+$('#here').onclick = () => navigator.geolocation.getCurrentPosition(p => { $('#lat').value = p.coords.latitude.toFixed(5); $('#lon').value = p.coords.longitude.toFixed(5); },
+  () => { $('#lat').value = '56.94960'; $('#lon').value = '24.10520'; });
+$('#sim').onclick = async () => {
+  try { const r = await api('/api/demo/simulate', { method: 'POST', body: { type: $('#type').value, lat: +$('#lat').value, lon: +$('#lon').value, count: +$('#count').value } });
+    $('#simOut').textContent = `Izveidoti ${r.created} demo ziņojumi.` + (r.notification ? ' Paziņojums nosūtīts!' : ''); refresh();
+  } catch (e) { $('#simOut').textContent = e.j?.error === 'not_logged_in' ? 'Vispirms pieslēdzieties.' : 'Kļūda: ' + e.message; }
+};
+$('#reset').onclick = async () => {
+  try { const r = await api('/api/demo/reset', { method: 'POST' }); $('#simOut').textContent = `Dzēsti ${r.reportsDeleted} demo ziņojumi un ${r.notificationsDeleted} paziņojumi.`; refresh(); }
+  catch (e) { $('#simOut').textContent = 'Vispirms pieslēdzieties.'; }
+};
+$('#lat').value = '56.94960'; $('#lon').value = '24.10520';
+me(); refresh(); setInterval(refresh, 15000);
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+// Inline SVG icons (24x24, drawn with currentColor).
+const ICON_PATHS = {
+  flood: '<path d="M4 15l4-10h8l4 10"/><path d="M12 6v2M12 10.5v2"/><path d="M2 18c1.5 0 1.5-1 3-1s1.5 1 3 1 1.5-1 3-1 1.5 1 3 1 1.5-1 3-1 1.5 1 3 1"/><path d="M2 21.5c1.5 0 1.5-1 3-1s1.5 1 3 1 1.5-1 3-1 1.5 1 3 1 1.5-1 3-1 1.5 1 3 1"/>',
+  tree: '<path d="M3 20l9-4"/><path d="M8 18l-2-3"/><circle cx="15.5" cy="9" r="3.5"/><circle cx="18.5" cy="12.5" r="3"/><circle cx="13" cy="13" r="3"/><path d="M14 16l-1.5 2.5"/>',
+  power: '<path d="M7 3v18M4 6h6M4 9h6"/><path d="M10 6c4 1 7 3 10 7M10 9c3 1.5 5 3.5 6.5 6.5"/><path d="M15 12l-2 4h3l-2 4"/>',
+  accident: '<path d="M2 17v-3l1.5-3h5L10 14v3"/><path d="M22 17v-3l-1.5-3h-5L14 14v3"/><circle cx="4.5" cy="17.5" r="1.5"/><circle cx="8" cy="17.5" r="1.5"/><circle cx="16" cy="17.5" r="1.5"/><circle cx="19.5" cy="17.5" r="1.5"/><path d="M12 3l1 3 2.5-1.5L14.5 8 17 8.5 14 10l-2 1-2-1-3-1.5L9.5 8 8.5 4.5 11 6z"/>',
+  ice: '<path d="M12 2v10M8 4l4 3 4-3M8 10l4-3 4 3M7.7 4.5l8.6 5M16.3 4.5l-8.6 5"/><path d="M4 17c2-2 4 2 6 0M10 21c2-2 4 2 6 0M14 17c2-2 4 2 6 0"/>',
+  other: '<circle cx="6" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="18" cy="12" r="1.6" fill="currentColor"/>',
+  roadworks: '<path d="M4 21h16"/><path d="M9 21l3-14 3 14"/><path d="M10 14h4M10.8 10.5h2.4"/><circle cx="17.5" cy="5" r="1.6"/><path d="M17.5 7v5l-2 3M17.5 9.5l2.5 2"/>',
+  closed: '<circle cx="12" cy="12" r="9"/><path d="M7 12h10" stroke-width="3"/>',
+  animal: '<path d="M5 12c0-3 3-5 6-5h4l2-3 1 3 2 1-1 2h-2v3l-1 6h-2l-.5-4h-4L8 19H6l.5-5C5.5 13.5 5 13 5 12z"/>',
+  warning: '<path d="M12 3l10 18H2z"/><path d="M12 10v5"/><circle cx="12" cy="18" r=".8" fill="currentColor"/>',
+  wind: '<path d="M3 8h11a3 3 0 1 0-3-3"/><path d="M3 12h16a3 3 0 1 1-3 3"/><path d="M3 16h8"/>',
+  rain: '<path d="M7 15a4 4 0 0 1-.5-8 5.5 5.5 0 0 1 10.6 1.5A3.5 3.5 0 0 1 17 15z"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/>',
+  snow: '<path d="M7 13a4 4 0 0 1-.5-8 5.5 5.5 0 0 1 10.6 1.5A3.5 3.5 0 0 1 17 13z"/><path d="M8 17h.01M12 19h.01M16 17h.01M10 21h.01M14 21h.01" stroke-width="2.6"/>',
+  thunder: '<path d="M7 14a4 4 0 0 1-.5-8 5.5 5.5 0 0 1 10.6 1.5A3.5 3.5 0 0 1 17 14"/><path d="M13 11l-3 5h4l-3 5"/>',
+  heat: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/>',
+  cold: '<path d="M12 2v20M4 7l16 10M20 7L4 17"/><path d="M9 3l3 2 3-2M9 21l3-2 3 2"/>',
+  fog: '<path d="M4 9h16M2 13h20M5 17h14M8 5h8"/>',
+  fire: '<path d="M12 22c4 0 7-3 7-7 0-5-5-7-5-12-3 2-4 5-4 7-1-1-2-2-2-4-2 2-3 5-3 9 0 4 3 7 7 7z"/>',
+  floodarea: '<path d="M4 12l8-7 8 7"/><path d="M6 10.5V15h12v-4.5"/><path d="M2 18c1.5 0 1.5-1 3-1s1.5 1 3 1 1.5-1 3-1 1.5 1 3 1 1.5-1 3-1 1.5 1 3 1"/>',
+  locate: '<circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+  close: '<path d="M6 6l12 12M18 6L6 18"/>',
+  chevron: '<path d="M9 6l6 6-6 6"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><circle cx="12" cy="7.5" r=".8" fill="currentColor"/>',
+  pin: '<path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/>',
+  calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+  edit: '<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>',
+  send: '<path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/>',
+  radio: '<circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7M15.5 8.5a5 5 0 0 1 0 7M5.6 5.6a9 9 0 0 0 0 12.8M18.4 5.6a9 9 0 0 1 0 12.8"/>',
+  check: '<circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>',
+  phone: '<path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/>',
+  user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  shelter: '<path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/><path d="M8.5 13.5V11l3.5-3 3.5 3v2.5"/><path d="M8.5 13.5h7v3h-7z"/>',
+  fuel: '<path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16"/><path d="M3 21h12"/><path d="M6.5 6.5h5v4h-5z"/><path d="M14 10h2a2 2 0 0 1 2 2v4.5a1.5 1.5 0 0 0 3 0V8l-3-3"/>',
+  atm: '<rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 9.5h19"/><path d="M6 15h4"/><circle cx="16.5" cy="14.5" r="1.8"/>',
+  download: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 11v6M9 14.5l3 3 3-3"/>',
+  wifi: '<path d="M2 8.5a15 15 0 0 1 20 0M5 12a10.5 10.5 0 0 1 14 0M8.5 15.5a5.5 5.5 0 0 1 7 0"/><circle cx="12" cy="19" r="1" fill="currentColor"/>',
+};
+
+function icon(name, size = 24, extra = '') {
+  const body = ICON_PATHS[name] || ICON_PATHS.warning;
+  return `<svg class="ic" ${extra} width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
+}

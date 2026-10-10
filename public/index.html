@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="lv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Krīzes karte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Radio ticker -->
+  <div class="ticker" role="marquee" aria-live="off">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <div class="page">
+    <main class="left">
+      <header class="topbar">
+        <div class="lang" role="group" aria-label="Valoda / Language">
+          <button data-lang="lv" class="active">LV</button>
+          <button data-lang="en">ENG</button>
+        </div>
+        <div class="brand">
+          <div class="brand-name"><span class="brand-dot"></span><span data-i18n="appName"></span></div>
+          <div class="brand-tag" data-i18n="appTag"></div>
+        </div>
+        <button class="btn-submit mobile-only" data-action="open-submit"><span data-i18n="submit"></span><span class="plus" data-icon="plus"></span></button>
+      </header>
+
+      <section class="card map-card">
+        <div id="map"></div>
+        <details class="map-layers card-float" id="layerBox" open>
+          <summary data-i18n="layers"></summary>
+          <label><input type="checkbox" data-layer="radar" checked><span class="sw sw-radar"></span><span data-i18n="lRadar"></span></label>
+          <label><input type="checkbox" data-layer="warnings" checked><span class="sw sw-warn"></span><span data-i18n="lWarnings"></span></label>
+          <label><input type="checkbox" data-layer="road" checked><span class="sw sw-road"></span><span data-i18n="lRoad"></span></label>
+          <label><input type="checkbox" data-layer="flood" checked><span class="sw sw-flood"></span><span data-i18n="lFlood"></span></label>
+          <label><input type="checkbox" data-layer="people" checked><span class="sw sw-people"></span><span data-i18n="lPeople"></span></label>
+          <hr>
+          <label><input type="checkbox" data-layer="shelter" checked><span class="sw sw-place shelter"></span><span data-i18n="lShelter"></span></label>
+          <label><input type="checkbox" data-layer="fuel" checked><span class="sw sw-place fuel"></span><span data-i18n="lFuel"></span></label>
+          <label><input type="checkbox" data-layer="atm" checked><span class="sw sw-place atm"></span><span data-i18n="lAtm"></span></label>
+        </details>
+        <div class="radar-legend card-float">
+          <div class="rl-title" data-i18n="radarLegend"></div>
+          <div class="rl-bar"></div>
+          <div class="rl-labels"><span data-i18n="radarLight"></span><span data-i18n="radarHeavy"></span></div>
+        </div>
+        <button class="map-btn locate" id="locateBtn" title="Mana atrašanās vieta" data-icon="locate"></button>
+        <div class="map-note" id="mapNote" hidden></div>
+      </section>
+
+      <section class="card list-card">
+        <div class="list-head">
+          <h2 id="nearbyTitle"></h2>
+          <div class="chips" id="chips">
+            <button class="chip active" data-filter="all"><span data-i18n="fAll"></span> <b data-count="all"></b></button>
+            <button class="chip" data-filter="road"><span class="chip-ic road" data-icon="roadworks"></span><span data-i18n="fRoad"></span> <b data-count="road"></b></button>
+            <button class="chip" data-filter="weather"><span class="chip-ic weather" data-icon="rain"></span><span data-i18n="fWeather"></span> <b data-count="weather"></b></button>
+            <button class="chip" data-filter="people"><span class="chip-ic people" data-icon="user"></span><span data-i18n="fPeople"></span> <b data-count="people"></b></button>
+          </div>
+        </div>
+        <div class="radius-row">
+          <label for="hazardRadius"><span data-i18n="radiusLabel"></span> <b id="hazardRadiusVal"></b></label>
+          <input type="range" id="hazardRadius" min="1" max="100" step="1" value="10">
+          <span class="radius-scale"><span>1 km</span><span>100 km</span></span>
+        </div>
+        <div class="table-wrap">
+          <table class="events">
+            <thead><tr>
+              <th data-i18n="colEvent"></th><th data-i18n="colDesc"></th><th data-i18n="colLoc"></th>
+              <th data-i18n="colUntil"></th><th data-i18n="colSrc"></th><th></th>
+            </tr></thead>
+            <tbody id="eventRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card list-card places-card">
+        <div class="list-head">
+          <h2 id="placesTitle"></h2>
+          <div class="chips" id="placeTabs">
+            <button class="ptab active" data-kind="shelter"><span class="chip-ic pk-shelter" data-icon="shelter"></span><span data-i18n="pShelter"></span> <b data-pcount="shelter"></b></button>
+            <button class="ptab" data-kind="fuel"><span class="chip-ic pk-fuel" data-icon="fuel"></span><span data-i18n="pFuel"></span> <b data-pcount="fuel"></b></button>
+            <button class="ptab" data-kind="atm"><span class="chip-ic pk-atm" data-icon="atm"></span><span data-i18n="pAtm"></span> <b data-pcount="atm"></b></button>
+          </div>
+        </div>
+        <div class="radius-row">
+          <label for="placeRadius"><span data-i18n="radiusLabel"></span> <b id="placeRadiusVal"></b></label>
+          <input type="range" id="placeRadius" min="1" max="100" step="1" value="10">
+          <span class="radius-scale"><span>1 km</span><span>100 km</span></span>
+        </div>
+        <div class="places-note" id="placesNote"></div>
+        <div class="table-wrap">
+          <table class="events places">
+            <thead><tr>
+              <th data-i18n="colPlace"></th><th data-i18n="colAddress"></th><th data-i18n="colDistance"></th>
+              <th data-i18n="colSrc"></th><th></th>
+            </tr></thead>
+            <tbody id="placeRows"></tbody>
+          </table>
+        </div>
+        <button class="show-more" id="placesMore" hidden></button>
+      </section>
+    </main>
+
+    <aside class="right">
+      <button class="btn-submit desktop-only" data-action="open-submit"><span data-i18n="submit"></span><span class="plus" data-icon="plus"></span></button>
+      <section class="card offline-card">
+        <div class="off-ic" data-icon="download"></div>
+        <div class="off-text">
+          <div class="off-title" data-i18n="offTitle"></div>
+          <div class="off-sub" id="offSub"></div>
+        </div>
+        <button class="off-btn" id="offBtn"><span data-icon="download"></span><span id="offBtnText" data-i18n="offBtn"></span></button>
+      </section>
+      <section class="card forecast">
+        <div class="fc-head">
+          <h2 data-i18n="fcTitle"></h2>
+          <button class="info-btn" id="fcInfoBtn" data-icon="info" aria-label="Info"></button>
+        </div>
+        <p class="fc-info" id="fcInfo" hidden data-i18n="fcInfo"></p>
+        <div class="fc-sub" id="fcSub"></div>
+        <div class="fc-list" id="fcList"></div>
+        <div class="fc-foot">
+          <div class="fc-updated"><span data-icon="clock"></span><span id="fcUpdated"></span></div>
+          <div class="fc-based" data-i18n="basedOn"></div>
+          <div class="fc-disclaimer"><span data-icon="info"></span><span data-i18n="disclaimer"></span></div>
+          <div class="session-line" id="sessionLine"></div>
+          <a class="admin-link" href="admin.html" data-i18n="adminLink"></a>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <!-- Modal: login -->
+  <div class="overlay" id="loginModal" hidden>
+    <form class="modal login" id="loginForm" autocomplete="on">
+      <button type="button" class="x" data-action="close" data-icon="close"></button>
+      <h2 data-i18n="loginTitle"></h2>
+      <p class="muted" data-i18n="loginSub"></p>
+      <label class="field"><span data-i18n="username"></span><input name="username" autocomplete="username" required></label>
+      <label class="field"><span data-i18n="password"></span><input name="password" type="password" autocomplete="current-password" required></label>
+      <div class="form-error" id="loginError" hidden></div>
+      <button class="btn-primary" type="submit" data-i18n="loginBtn"></button>
+    </form>
+  </div>
+
+  <!-- Modal: what happened -->
+  <div class="overlay" id="typeModal" hidden>
+    <div class="modal types">
+      <div class="grabber"></div>
+      <button type="button" class="x" data-action="close" data-icon="close"></button>
+      <h2 class="red-title" data-i18n="whatHappened"></h2>
+      <div class="type-list" id="typeList"></div>
+    </div>
+  </div>
+
+  <!-- Full screen: report form -->
+  <div class="report-screen" id="reportScreen" hidden>
+    <header class="report-top">
+      <button class="btn-ghost" data-action="close-report"><span data-icon="close"></span><span data-i18n="back"></span></button>
+      <div class="report-radio"><span data-icon="radio"></span><span id="reportRadio"></span></div>
+      <button class="btn-edit" id="editBtn"><span data-icon="edit"></span><span id="editBtnText" data-i18n="editSubmission"></span></button>
+    </header>
+    <div id="reportMap"></div>
+    <div class="report-hint" id="reportHint"></div>
+    <form class="report-card" id="reportForm">
+      <div class="rc-row">
+        <div class="rc-icon" id="rcIcon"></div>
+        <div class="rc-type">
+          <div class="rc-type-name" id="rcTypeName"></div>
+          <select id="rcTypeSelect" hidden></select>
+        </div>
+        <div class="rc-field rc-addr">
+          <span class="rc-label"><span data-icon="pin"></span><span data-i18n="address"></span></span>
+          <input id="rcAddress" readonly autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="addrSuggest">
+          <div class="addr-suggest" id="addrSuggest" role="listbox" hidden></div>
+          <span class="rc-coords" id="rcCoords"></span>
+        </div>
+        <div class="rc-field">
+          <span class="rc-label"><span data-icon="calendar"></span><span data-i18n="observedAt"></span></span>
+          <input id="rcTime" type="datetime-local" readonly>
+        </div>
+      </div>
+      <div class="rc-row rc-bottom">
+        <label class="rc-desc">
+          <span class="rc-label"><span data-i18n="description"></span> <i data-i18n="optional"></i></span>
+          <textarea id="rcDesc" rows="2"></textarea>
+          <span class="rc-count" id="rcCount"></span>
+        </label>
+        <button class="btn-send" type="button" id="sendBtn"><span data-icon="send"></span><span data-i18n="submit"></span></button>
+      </div>
+      <div class="form-error" id="reportError" hidden></div>
+    </form>
+  </div>
+
+  <div class="toast-box" id="toasts"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="icons.js"></script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
