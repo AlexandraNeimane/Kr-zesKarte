@@ -104,6 +104,10 @@ h2 { font-size: 76px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.0
 .vcard h3 { font-size: 38px; font-weight: 800; }
 .vcard p { font-size: 27px; line-height: 1.45; color: var(--muted); }
 
+.vgrid-compact { top: 380px; }
+.vgrid-compact .vcard { flex-direction: row; align-items: center; gap: 26px; padding: 44px 40px; }
+.vgrid-compact .vcard h3 { font-size: 44px; }
+
 /* numbers */
 .stats { position: absolute; left: 128px; top: 400px; width: 1664px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
 .stat { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.28); border-radius: 30px; padding: 40px 36px; backdrop-filter: blur(6px); }
@@ -180,10 +184,10 @@ h2 { font-size: 76px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.0
     <div class="me"></div>
   </div>
   <div class="abs" style="left:128px;top:180px;width:980px;display:flex;flex-direction:column;gap:34px">
-    <div data-a="fade" style="--d:.2s"><span style="display:inline-block;font-size:24px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#bff0d3;background:#1d4a37;border:1px solid #2fb36b;border-radius:30px;padding:10px 26px">Prototips · [Komandas nosaukums]</span></div>
+    <div data-a="fade" style="--d:.2s"><span style="display:inline-block;font-size:24px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#bff0d3;background:#1d4a37;border:1px solid #2fb36b;border-radius:30px;padding:10px 26px">Prototips · Krīzes pārvaldnieki</span></div>
     <h1 data-a="rise" style="--d:.4s;font-size:160px;font-weight:800;letter-spacing:-4px;line-height:1">Krīzes karte</h1>
-    <p data-a="rise" style="--d:.6s;font-size:52px;font-weight:700;line-height:1.2;color:#e4dcfb">Viss svarīgākais krīzes brīdī — <span class="grad-text">vienuviet.</span></p>
-    <p data-a="rise" style="--d:.8s;font-size:32px;line-height:1.5;color:#c9c0ea;max-width:900px">Brīdinājumi, ceļu stāvoklis, patvertnes un palīdzība 10 km rādiusā ap tevi — arī tad, kad pazūd internets.</p>
+    <p data-a="rise" style="--d:.6s;font-size:46px;font-weight:700;line-height:1.2;color:#e4dcfb;white-space:nowrap">Viss svarīgākais krīzes brīdī <span class="grad-text">vienuviet.</span></p>
+    <p data-a="rise" style="--d:.8s;font-size:32px;line-height:1.5;color:#c9c0ea;max-width:900px">Brīdinājumi, ceļu stāvoklis, patvertnes un palīdzība tavā apkārtnē — arī tad, kad pazūd internets.</p>
   </div>
   <div class="ticker" data-a="fade" style="--d:1s"><div class="track" data-ticker></div></div>
 </section>
@@ -196,19 +200,19 @@ h2 { font-size: 76px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.0
     <h2 data-a="rise" style="--d:.1s;max-width:880px">Krīzē informācija ir izkaisīta</h2>
     <p class="sub" data-a="rise" style="--d:.25s;max-width:820px">Lai saprastu, kas notiek tuvumā, jāpārbauda daudzas dažādas vietnes — tieši tad, kad katra minūte ir svarīga.</p>
   </div>
-  <div class="abs" data-magic="s1" style="left:1010px;top:150px"><div data-a="drop" style="--d:.35s"><div class="card src" style="transform:rotate(-6deg)"><span class="ic c-red" data-icon="warning"></span><span><b>Laika brīdinājumi</b><small>bridinajumi.meteo.lv</small></span></div></div></div>
+  <div class="abs" data-magic="s1" style="left:1010px;top:150px"><div data-a="drop" style="--d:.35s"><div class="card src" style="transform:rotate(-6deg)"><span class="ic c-red" data-icon="warning"></span><span><b>Krīzes brīdinājumi</b><small>bridinajumi.meteo.lv</small></span></div></div></div>
   <div class="abs" data-magic="s2" style="left:1380px;top:330px"><div data-a="drop" style="--d:.45s"><div class="card src" style="transform:rotate(5deg)"><span class="ic c-blue" data-icon="rain"></span><span><b>Laika prognozes</b><small>data.gov.lv</small></span></div></div></div>
   <div class="abs" data-magic="s3" style="left:150px;top:612px"><div data-a="drop" style="--d:.55s"><div class="card src" style="transform:rotate(4deg)"><span class="ic c-green" data-icon="roadworks"></span><span><b>Ceļu notikumi</b><small>transportdata.gov.lv</small></span></div></div></div>
-  <div class="abs" data-magic="s4" style="left:700px;top:500px"><div data-a="drop" style="--d:.65s"><div class="card src" style="transform:rotate(-3deg)"><span class="ic c-purple" data-icon="flood"></span><span><b>Plūdu prognozes</b><small>LVĢMC</small></span></div></div></div>
+  <div class="abs" data-magic="s4" style="left:810px;top:452px"><div data-a="drop" style="--d:.65s"><div class="card src" style="transform:rotate(-3deg)"><span class="ic c-purple" data-icon="flood"></span><span><b>Plūdu prognozes</b><small>LVĢMC</small></span></div></div></div>
   <div class="abs" data-magic="s5" style="left:1250px;top:590px"><div data-a="drop" style="--d:.75s"><div class="card src" style="transform:rotate(-7deg)"><span class="ic c-green" data-icon="shelter"></span><span><b>Patvertnes</b><small>112.lv</small></span></div></div></div>
   <div class="abs" data-magic="s6" style="left:380px;top:790px"><div data-a="drop" style="--d:.85s"><div class="card src" style="transform:rotate(-5deg)"><span class="ic c-purple" data-icon="atm"></span><span><b>Krīzes bankomāti</b><small>bank.lv</small></span></div></div></div>
   <div class="abs" data-magic="s7" style="left:930px;top:800px"><div data-a="drop" style="--d:.95s"><div class="card src" style="transform:rotate(6deg)"><span class="ic c-orange" data-icon="fuel"></span><span><b>Degvielas stacijas</b><small>viss.lv</small></span></div></div></div>
-  <div class="abs" data-magic="s8" style="left:1400px;top:820px"><div data-a="drop" style="--d:1.05s"><div class="card src" style="transform:rotate(-2deg)"><span class="ic c-ink" data-icon="user"></span><span><b>Iedzīvotāju novērojumi</b><small>zvani, sociālie tīkli</small></span></div></div></div>
+  <div class="abs" data-magic="s8" style="left:1400px;top:820px"><div data-a="drop" style="--d:1.05s"><div class="card src" style="transform:rotate(-2deg)"><span class="ic c-ink" data-icon="user"></span><span><b>Iedzīvotāju paziņojumi</b><small>zvani, sociālie tīkli</small></span></div></div></div>
   <div class="abs" data-a="pop" style="--d:1.4s;left:128px;top:492px"><span style="display:inline-flex;align-items:center;gap:16px;font-size:30px;font-weight:800;color:#fff;background:var(--red);border-radius:22px;padding:16px 28px;box-shadow:0 14px 30px rgba(214,40,57,.35)"><span data-icon="wifi-off"></span>Un ja pazūd internets — pazūd viss.</span></div>
 </section>
 
 <!-- 3. GOAL (hub; cards fly here from the problem slide) -->
-<section class="slide light2" data-notes="Mūsu mērķis: apvienot visu svarīgāko vienā kartē. Visi šie avoti tagad ir vienā vietā — Krīzes kartē, kas brīdina par draudiem 10 km rādiusā ap lietotāju un palīdz ātri atrast palīdzību. Cilvēkam vairs nav jāzina, kur ko meklēt.">
+<section class="slide light2" data-notes="Mūsu mērķis: apvienot visu svarīgāko vienā kartē. Visi šie avoti tagad ir vienā vietā — Krīzes kartē, kas brīdina par draudiem apkārt lietotājam un dod iespēju atrast palīdzību un palīdzēt citiem. Cilvēkam vairs nav jāzina, kur ko meklēt.">
   <div class="head" style="align-items:center;text-align:center">
     <div class="eyebrow" data-a="fade">Mūsu mērķis</div>
     <h2 data-a="rise" style="--d:.1s">Apvienot visu svarīgāko vienā kartē</h2>
@@ -225,34 +229,33 @@ h2 { font-size: 76px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.0
       <path pathLength="1" style="--d:1.5s" d="M1360 840 C 1270 840, 1220 760, 1160 720"/>
     </g>
   </svg>
-  <div class="hub" data-a="pop" style="--d:.5s"><b>Krīzes karte</b><span>brīdina par draudiem 10 km rādiusā un palīdz ātri atrast palīdzību</span></div>
-  <div class="abs" data-magic="s1" style="left:128px;top:304px"><div class="card src"><span class="ic c-red" data-icon="warning"></span><span><b>Laika brīdinājumi</b><small>bridinajumi.meteo.lv</small></span></div></div>
+  <div class="hub" data-a="pop" style="--d:.5s"><b>Krīzes karte</b><span>brīdina par draudiem apkārt tevi un dod iespēju atrast palīdzību un palīdzēt citiem</span></div>
+  <div class="abs" data-magic="s1" style="left:128px;top:304px"><div class="card src"><span class="ic c-red" data-icon="warning"></span><span><b>Krīzes brīdinājumi</b><small>bridinajumi.meteo.lv</small></span></div></div>
   <div class="abs" data-magic="s2" style="left:128px;top:464px"><div class="card src"><span class="ic c-blue" data-icon="rain"></span><span><b>Laika prognozes</b><small>data.gov.lv</small></span></div></div>
   <div class="abs" data-magic="s3" style="left:128px;top:624px"><div class="card src"><span class="ic c-green" data-icon="roadworks"></span><span><b>Ceļu notikumi</b><small>transportdata.gov.lv</small></span></div></div>
   <div class="abs" data-magic="s4" style="left:128px;top:784px"><div class="card src"><span class="ic c-purple" data-icon="flood"></span><span><b>Plūdu prognozes</b><small>LVĢMC</small></span></div></div>
   <div class="abs" data-magic="s5" style="left:1362px;top:304px"><div class="card src"><span class="ic c-green" data-icon="shelter"></span><span><b>Patvertnes</b><small>112.lv</small></span></div></div>
   <div class="abs" data-magic="s6" style="left:1362px;top:464px"><div class="card src"><span class="ic c-purple" data-icon="atm"></span><span><b>Krīzes bankomāti</b><small>bank.lv</small></span></div></div>
   <div class="abs" data-magic="s7" style="left:1362px;top:624px"><div class="card src"><span class="ic c-orange" data-icon="fuel"></span><span><b>Degvielas stacijas</b><small>viss.lv</small></span></div></div>
-  <div class="abs" data-magic="s8" style="left:1362px;top:784px"><div class="card src"><span class="ic c-ink" data-icon="user"></span><span><b>Iedzīvotāju ziņojumi</b><small>tieši lietotnē</small></span></div></div>
+  <div class="abs" data-magic="s8" style="left:1362px;top:784px"><div class="card src"><span class="ic c-ink" data-icon="user"></span><span><b>Iedzīvotāju paziņojumi</b><small>tieši lietotnē</small></span></div></div>
 </section>
 
 <!-- 4. OBJECTIVES + AUDIENCE -->
-<section class="slide light" data-notes="Lai sasniegtu mērķi, izvirzījām četrus uzdevumus: rādīt oficiālos brīdinājumus un ceļu stāvokli tuvumā; ļaut iedzīvotājiem ziņot pašiem; automātiski informēt glābējus, ja ziņojumu ir daudz; un nodrošināt informāciju arī bez interneta. Mūsu mērķauditorija ir visi Latvijas iedzīvotāji, īpaši autovadītāji, cilvēki laukos, kur palīdzība ir tālāk, un tie, kam internets var pazust.">
+<section class="slide light" data-notes="Lai sasniegtu mērķi, izvirzījām četrus uzdevumus: rādīt brīdinājumus un ceļu stāvokli apkārtnē; ļaut iedzīvotājiem ziņot par draudiem; automātiski informēt glābējus, ja ziņojumu ir daudz; un nodrošināt informāciju arī bez interneta. Mūsu mērķauditorija ir visi Latvijas iedzīvotāji, īpaši tie, kuri ir ceļā, un tie, kam internets var pazust.">
   <div class="head">
     <div class="eyebrow" data-a="fade">Uzdevumi un mērķauditorija</div>
     <h2 data-a="rise" style="--d:.1s">Ko tieši gribējām panākt — un kam</h2>
   </div>
   <div class="abs" style="left:128px;top:340px;width:960px;display:flex;flex-direction:column;gap:34px">
-    <div class="num-row" data-a="left" style="--d:.3s"><span class="num">1</span><p><b>Rādīt oficiālos brīdinājumus</b> un ceļu stāvokli 10 km rādiusā ap lietotāju</p></div>
-    <div class="num-row" data-a="left" style="--d:.45s"><span class="num">2</span><p><b>Ļaut iedzīvotājiem ziņot</b> par šķēršļiem un draudiem uz ceļa dažos klikšķos</p></div>
-    <div class="num-row" data-a="left" style="--d:.6s"><span class="num">3</span><p><b>Automātiski informēt glābējus</b>, kad vienā vietā ir daudz vienādu ziņojumu</p></div>
+    <div class="num-row" data-a="left" style="--d:.3s"><span class="num">1</span><p><b>Rādīt brīdinājumus</b></p></div>
+    <div class="num-row" data-a="left" style="--d:.45s"><span class="num">2</span><p><b>Ļaut iedzīvotājiem ziņot par draudiem</b></p></div>
+    <div class="num-row" data-a="left" style="--d:.6s"><span class="num">3</span><p><b>Automātiski informēt glābējus</b></p></div>
     <div class="num-row" data-a="left" style="--d:.75s"><span class="num" style="background:var(--green-7)">4</span><p><b>Nodrošināt informāciju bez interneta</b> — radio frekvence un PDF kopija</p></div>
   </div>
   <div class="abs card" data-a="right" style="--d:.5s;left:1180px;top:320px;width:612px;padding:44px;display:flex;flex-direction:column;gap:30px">
     <h3 style="font-size:40px;font-weight:800">Kam tas paredzēts?</h3>
-    <div class="person"><span class="ic" style="background:var(--lav-2);color:var(--purple)" data-icon="user"></span>Visi Latvijas iedzīvotāji — latviski un angliski</div>
-    <div class="person"><span class="ic" style="background:var(--green-1);color:var(--green-7)" data-icon="accident"></span>Autovadītāji un ceļotāji</div>
-    <div class="person"><span class="ic" style="background:var(--lav-2);color:var(--purple)" data-icon="tree"></span>Lauku iedzīvotāji, kur palīdzība ir tālāk</div>
+    <div class="person"><span class="ic" style="background:var(--lav-2);color:var(--purple)" data-icon="user"></span>Visi Latvijas iedzīvotāji</div>
+    <div class="person"><span class="ic" style="background:var(--green-1);color:var(--green-7)" data-icon="accident"></span>Tiem, kuri ir ceļā</div>
     <div class="person"><span class="ic" style="background:var(--green-1);color:var(--green-7)" data-icon="radio"></span>Cilvēki, kuriem var pazust internets</div>
   </div>
 </section>
@@ -263,13 +266,13 @@ h2 { font-size: 76px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.0
     <div class="eyebrow" data-a="fade">Vērtības</div>
     <h2 data-a="rise" style="--d:.1s">Kas ir svarīgākais mums un lietotājiem?</h2>
   </div>
-  <div class="vgrid">
-    <div class="card vcard" data-a="pop" style="--d:.3s"><span class="ic c-purple" data-icon="bolt"></span><h3>Ātrums</h3><p>Viss redzams vienā skatā — nav jāmeklē pa vairākām vietnēm.</p></div>
-    <div class="card vcard" data-a="pop" style="--d:.4s"><span class="ic c-green" data-icon="check"></span><h3>Uzticamība</h3><p>Oficiālie dati: LVĢMC, LVC, VUGD, Latvijas Banka.</p></div>
-    <div class="card vcard" data-a="pop" style="--d:.5s"><span class="ic c-red" data-icon="locate"></span><h3>Tuvums</h3><p>Tikai tas, kas attiecas uz tevi — 10 km, rādiusu var palielināt līdz 100 km.</p></div>
-    <div class="card vcard" data-a="pop" style="--d:.6s"><span class="ic c-green" data-icon="globe"></span><h3>Pieejamība</h3><p>Latviski un angliski, telefonā un datorā — arī bez interneta.</p></div>
-    <div class="card vcard" data-a="pop" style="--d:.7s"><span class="ic c-purple" data-icon="users"></span><h3>Kopiena</h3><p>Iedzīvotāji ziņo par problēmām un noņem tās, kad tās atrisinātas.</p></div>
-    <div class="card vcard" data-a="pop" style="--d:.8s"><span class="ic c-ink" data-icon="lock"></span><h3>Drošība</h3><p>Pieteikšanās, neatļauto vārdu filtrs un tikai kritiskā informācija.</p></div>
+  <div class="vgrid vgrid-compact">
+    <div class="card vcard" data-a="pop" style="--d:.3s"><span class="ic c-purple" data-icon="bolt"></span><h3>Ātrums</h3></div>
+    <div class="card vcard" data-a="pop" style="--d:.4s"><span class="ic c-green" data-icon="check"></span><h3>Uzticamība</h3></div>
+    <div class="card vcard" data-a="pop" style="--d:.5s"><span class="ic c-red" data-icon="locate"></span><h3>Tuvums</h3></div>
+    <div class="card vcard" data-a="pop" style="--d:.6s"><span class="ic c-green" data-icon="globe"></span><h3>Pieejamība</h3></div>
+    <div class="card vcard" data-a="pop" style="--d:.7s"><span class="ic c-purple" data-icon="users"></span><h3>Kopiena</h3></div>
+    <div class="card vcard" data-a="pop" style="--d:.8s"><span class="ic c-ink" data-icon="lock"></span><h3>Drošība</h3></div>
   </div>
 </section>
 
@@ -277,8 +280,8 @@ h2 { font-size: 76px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.0
 <section class="slide accent" data-notes="Šie nav izdomāti skaitļi — tie ir dati, ko mūsu prototips šobrīd ielādē no oficiālajiem avotiem: 787 patvertnes no VUGD, 400 degvielas stacijas, 111 krīzes bankomāti no Latvijas Bankas un LVĢMC stundu prognoze 6427 apdzīvotām vietām. Brīdinājumi un ceļu notikumi atjaunojas ik pēc 5 minūtēm, prognozes ik pēc 30 minūtēm.">
   <div class="blob" style="left:1300px;top:500px;width:700px;height:700px;background:#2fb36b;opacity:.35"></div>
   <div class="head">
-    <div class="eyebrow" data-a="fade">Reāli dati, nevis makets</div>
-    <h2 data-a="rise" style="--d:.1s;color:#fff">Viena karte — dati no 8 oficiāliem un kopienas avotiem</h2>
+    <div class="eyebrow" data-a="fade">Atvērtie dati</div>
+    <h2 data-a="rise" style="--d:.1s;color:#fff">Viena karte — dati no 8 oficiāliem avotiem</h2>
   </div>
   <div class="stats">
     <div class="stat" data-a="rise" style="--d:.3s"><div class="ic" data-icon="shelter"></div><div class="big" data-count="787">0</div><div class="lbl">patvertnes<br>(VUGD / 112.lv)</div></div>
@@ -290,22 +293,22 @@ h2 { font-size: 76px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.0
 </section>
 
 <!-- 7. HOW IT WORKS -->
-<section class="slide light" data-notes="Kā tas darbojas — četri soļi. Pirmkārt, atver lapu, un karte pati nosaka atrašanās vietu. Otrkārt, ja redzi problēmu, pieslēdzies un trīs soļos ziņo. Treškārt, ja 250 metru rādiusā sakrīt 25 viena veida ziņojumi, sistēma automātiski sūta paziņojumu dienestam uz 8000 8989. Ceturtkārt, jebkurā brīdī vari lejupielādēt PDF ar karti un visu svarīgo, ja internets pazūd.">
+<section class="slide light" data-notes="Kā tas darbojas — četri soļi. Pirmkārt, atver lapu, un karte pati nosaka atrašanās vietu. Otrkārt, ja redzi problēmu, pieslēdzies un ziņo. Treškārt, ja 250 metru rādiusā sakrīt 25 viena veida ziņojumi, sistēma automātiski sūta paziņojumu uz avārijas dienesta numuru 8000 8989. Ceturtkārt, jebkurā brīdī vari lejupielādēt PDF ar karti un visu svarīgo, ja internets pazūd.">
   <div class="head">
     <div class="eyebrow" data-a="fade">Risinājums</div>
     <h2 data-a="rise" style="--d:.1s">Kā Krīzes karte darbojas</h2>
   </div>
   <svg class="draw" viewBox="0 0 1920 1080" style="position:absolute;inset:0;pointer-events:none" aria-hidden="true">
     <g stroke="#8f6cf0" stroke-width="5" stroke-linecap="round">
-      <path pathLength="1" style="--d:.9s" d="M528 580 L 566 580"/><path pathLength="1" style="--d:.9s" d="M552 566 L 566 580 L 552 594"/>
-      <path pathLength="1" style="--d:1.2s" d="M954 580 L 992 580"/><path pathLength="1" style="--d:1.2s" d="M978 566 L 992 580 L 978 594"/>
-      <path pathLength="1" style="--d:1.5s" d="M1380 580 L 1418 580"/><path pathLength="1" style="--d:1.5s" d="M1404 566 L 1418 580 L 1404 594"/>
+      <path pathLength="1" style="--d:.9s" d="M514 580 L 542 580"/><path pathLength="1" style="--d:.9s" d="M531 569 L 542 580 L 531 591"/>
+      <path pathLength="1" style="--d:1.2s" d="M946 580 L 974 580"/><path pathLength="1" style="--d:1.2s" d="M963 569 L 974 580 L 963 591"/>
+      <path pathLength="1" style="--d:1.5s" d="M1378 580 L 1406 580"/><path pathLength="1" style="--d:1.5s" d="M1395 569 L 1406 580 L 1395 591"/>
     </g>
   </svg>
   <div class="steps">
-    <div class="card step" data-a="rise" style="--d:.3s"><span class="badge">1. Redzi</span><span class="ic c-purple" data-icon="locate"></span><h3>Atver lapu</h3><p>Karte pati nosaka atrašanās vietu un rāda draudus 10 km rādiusā un 24 h prognozi.</p></div>
-    <div class="card step" data-a="rise" style="--d:.6s"><span class="badge">2. Ziņo</span><span class="ic c-green" data-icon="plus"></span><h3>Ziņo 3 soļos</h3><p>Applūdis ceļš, kritis koks, pārrauti vadi, negadījums, apledojums. Atrisināts? Noņem.</p></div>
-    <div class="card step" data-a="rise" style="--d:.9s"><span class="badge">3. Reaģē</span><span class="ic c-red" data-icon="phone"></span><h3>Sistēma ziņo</h3><p>25 vienādi ziņojumi 250 m rādiusā → automātisks paziņojums uz 8000 8989.</p></div>
+    <div class="card step" data-a="rise" style="--d:.3s"><span class="badge">1. Redzi</span><span class="ic c-purple" data-icon="locate"></span><h3>Atver lapu</h3><p>Karte pati nosaka atrašanās vietu un rāda draudus tavā apkārtnē un 24 h prognozi.</p></div>
+    <div class="card step" data-a="rise" style="--d:.6s"><span class="badge">2. Ziņo</span><span class="ic c-green" data-icon="plus"></span><h3>Ziņo</h3><p>Applūdis ceļš, kritis koks, pārrauti vadi, negadījums, apledojums. Atrisināts? Noņem.</p></div>
+    <div class="card step" data-a="rise" style="--d:.9s"><span class="badge">3. Reaģē</span><span class="ic c-red" data-icon="phone"></span><h3>Sistēma ziņo</h3><p>25 vienādi ziņojumi 250&nbsp;m rādiusā → automātisks paziņojums. Avārijas dienesta numurs: <b style="color:var(--ink)">8000&nbsp;8989</b></p></div>
     <div class="card step" data-a="rise" style="--d:1.2s"><span class="badge" style="background:var(--green-7)">4. Bezsaistē</span><span class="ic c-ink" data-icon="download"></span><h3>Saglabā PDF</h3><p>Karte, adreses, tālruņi un norādījumi — tālrunī vai uz papīra.</p></div>
   </div>
 </section>
@@ -319,7 +322,7 @@ h2 { font-size: 76px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.0
     <h2 data-a="rise" style="--d:.15s;font-size:110px;line-height:1">Parādīsim, kā tas strādā</h2>
     <p class="sub" data-a="rise" style="--d:.3s">Atvērsim Krīzes karti un iziesim cauri visam ceļam — no brīdinājuma līdz paziņojumam glābējiem.</p>
     <div data-a="pop" style="--d:.5s"><a class="btn-open" href="http://localhost:3000/" target="_blank" rel="noopener"><span data-icon="map"></span>Atvērt Krīzes karti<span style="font-size:30px;opacity:.85">↗</span></a></div>
-    <p data-a="fade" style="--d:.7s;font-size:26px;color:#c9c0ea">localhost:3000 · [publiskā saite, ja būs]</p>
+    <p data-a="fade" style="--d:.7s;font-size:26px;color:#c9c0ea">localhost:3000</p>
   </div>
   <div class="abs demo-list" style="left:1150px;top:250px;width:660px">
     <div class="demo-item" data-a="right" style="--d:.6s"><span class="n">1</span>Karte, brīdinājumi un prognoze</div>
@@ -341,7 +344,7 @@ h2 { font-size: 76px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.0
     <div class="card vcard" data-a="rise" style="--d:.4s"><span class="ic c-red" data-icon="warning"></span><h3>Saikne ar 112</h3><p>Īsta paziņojumu nosūtīšana dienestiem — prototipā tā ir simulēta.</p></div>
     <div class="card vcard" data-a="rise" style="--d:.5s"><span class="ic c-green" data-icon="power"></span><h3>Vairāk datu</h3><p>Elektrības un ūdens pārtraukumi, ceļu meteostacijas, satiksmes kameras.</p></div>
     <div class="card vcard" data-a="rise" style="--d:.6s"><span class="ic c-orange" data-icon="camera"></span><h3>Foto un uzticamība</h3><p>Bilde pie ziņojuma, ziņotāju reitings un viltus ziņojumu filtrs.</p></div>
-    <div class="card vcard" data-a="rise" style="--d:.7s"><span class="ic c-ink" data-icon="globe"></span><h3>Visiem pieejama</h3><p>Krievu un ukraiņu valoda, ekrāna lasītāji, liela kontrasta režīms.</p></div>
+    <div class="card vcard" data-a="rise" style="--d:.7s"><span class="ic c-ink" data-icon="globe"></span><h3>Visiem pieejama</h3><p>Citu valodu attīstība, ekrāna lasītāji, liela kontrasta režīms.</p></div>
     <div class="card vcard" data-a="rise" style="--d:.8s"><span class="ic c-purple" data-icon="wifi"></span><h3>Internets krīzē</h3><p>Kur pieejams Wi-Fi vai uzlāde, kad mobilais tīkls nedarbojas.</p></div>
   </div>
 </section>
@@ -355,7 +358,7 @@ h2 { font-size: 76px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.0
   <div class="abs card col-card" data-a="left" style="--d:.4s;left:128px;top:380px;width:900px">
     <h3><span data-icon="check" style="color:var(--green-7)"></span>Izdevās</h3>
     <div class="check"><span class="ic c-green" data-icon="tick"></span>Oficiālie dati no daudziem avotiem vienā kartē</div>
-    <div class="check"><span class="ic c-green" data-icon="tick"></span>Ziņošana 3 soļos un automātisks paziņojums glābējiem</div>
+    <div class="check"><span class="ic c-green" data-icon="tick"></span>Iedzīvotāju ziņošana un automātisks paziņojums glābējiem</div>
     <div class="check"><span class="ic c-green" data-icon="tick"></span>Patvertnes, krīzes bankomāti, degviela — rādiuss līdz 100 km</div>
     <div class="check"><span class="ic c-green" data-icon="tick"></span>Bezsaistes PDF ar karti, adresēm un tālruņiem</div>
     <div class="check"><span class="ic c-green" data-icon="tick"></span>Latviešu un angļu valoda, telefons un dators</div>
@@ -364,42 +367,44 @@ h2 { font-size: 76px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.0
     <h3><span data-icon="clock" style="color:var(--purple)"></span>Vēl jāizdara</h3>
     <div class="check"><span class="ic c-purple" data-icon="arrow"></span>Īsta paziņojumu nosūtīšana dienestiem</div>
     <div class="check"><span class="ic c-purple" data-icon="arrow"></span>Publisks serveris un slodzes testi</div>
-    <div class="check"><span class="ic c-purple" data-icon="arrow"></span>Sadarbība ar datu turētājiem (NAP, 112)</div>
+    <div class="check"><span class="ic c-purple" data-icon="arrow"></span>Sadarbība ar datu turētājiem (avārijas dienesta numurs, 112)</div>
     <div class="check"><span class="ic c-purple" data-icon="arrow"></span>Testēšana ar reāliem lietotājiem</div>
   </div>
 </section>
 
 <!-- 11. THANKS -->
-<section class="slide dark" data-notes="Krīzē katra minūte ir svarīga. Krīzes karte palīdz to neiztērēt, meklējot informāciju pa dažādām vietnēm — viss svarīgākais ir vienuviet. Paldies par uzmanību! Labprāt atbildēsim uz jautājumiem.">
+<section class="slide dark" data-notes="Krīzē katra minūte ir svarīga. Krīzes karte palīdz to neiztērēt, meklējot informāciju pa dažādām vietnēm — viss svarīgākais ir vienuviet. Paldies par uzmanību!">
   <div class="blob" style="left:600px;top:120px;width:760px;height:760px;background:#6d3fd6"></div>
   <div class="blob" style="left:1300px;top:600px;width:600px;height:420px;background:#1f9a5a;animation-delay:-5s"></div>
   <div class="abs" style="left:128px;top:200px;width:1664px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:40px">
     <h1 class="grad-text" data-a="zoom" style="--d:.1s;font-size:220px;font-weight:800;letter-spacing:-6px;line-height:1">Paldies!</h1>
     <p data-a="rise" style="--d:.4s;font-size:48px;font-weight:700;line-height:1.3;max-width:1300px;color:#ece6ff">Krīzē katra minūte ir svarīga — tāpēc viss svarīgākais ir vienuviet.</p>
-    <div data-a="pop" style="--d:.7s"><span style="display:inline-block;font-size:40px;font-weight:800;color:#24135c;background:#f4f1fb;border-radius:24px;padding:18px 44px">Jautājumi?</span></div>
-    <p data-a="fade" style="--d:.9s;font-size:28px;color:#c9c0ea">[Komandas dalībnieki] · [Datums]</p>
+    <div data-a="rise" style="--d:.7s;display:flex;flex-direction:column;align-items:center;gap:14px">
+      <p style="font-size:30px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#bff0d3">Komanda „Krīzes pārvaldnieki”</p>
+      <p style="font-size:32px;font-weight:600;line-height:1.5;color:#ece6ff;max-width:1400px">Kira Solovjova · Aleksandra Neimane · Marija Čufarova · Valentīns Persaņs · Arnis Skraučs</p>
+      <p style="font-size:28px;color:#c9c0ea">10.10.2026</p>
+    </div>
   </div>
   <div class="ticker" data-a="fade" style="--d:1s"><div class="track" data-ticker></div></div>
 </section>
 
 <!-- 12. SOURCES -->
-<section class="slide light2" data-notes="Avoti. Projekta kods un sākotnējais datu avotu saraksts ir mūsu GitHub repozitorijā. Visi dati kartē nāk no publiskiem, atvērtiem avotiem: LVĢMC, Latvijas Valsts ceļu Nacionālā piekļuves punkta, VUGD, Latvijas Bankas un viss.lv, kā arī no pašu iedzīvotāju ziņojumiem. Karte un adreses — OpenStreetMap. Divus avotus no saraksta — ceļu meteostaciju mērījumus un satiksmes plūsmu — nepievienojām, jo tiem vajag reģistrētu NAP kontu.">
+<section class="slide light2" data-notes="Avoti. Projekta kods ir mūsu GitHub repozitorijā. Visi dati kartē nāk no publiskiem, atvērtiem avotiem: LVĢMC, Latvijas Valsts ceļu Nacionālā piekļuves punkta, VUGD, Latvijas Bankas un viss.lv, kā arī no pašu iedzīvotāju ziņojumiem. Karte un adreses — OpenStreetMap.">
   <div class="head" style="flex-direction:row;align-items:flex-end;justify-content:space-between">
     <div style="display:flex;flex-direction:column;gap:14px">
       <div class="eyebrow" data-a="fade">Avoti</div>
       <h2 data-a="rise" style="--d:.1s">Dati un atvērtie resursi</h2>
     </div>
-    <a class="src-repo" data-a="pop" style="--d:.3s" href="https://github.com/FicusSus/KrizesParvaldiba" target="_blank" rel="noopener"><span data-icon="github"></span>github.com/FicusSus/KrizesParvaldiba</a>
+    <a class="src-repo" data-a="pop" style="--d:.3s" href="https://github.com/AlexandraNeimane/Kr-zesKarte.git" target="_blank" rel="noopener"><span data-icon="github"></span>github.com/AlexandraNeimane/Kr-zesKarte</a>
   </div>
   <div class="abs card src-col" data-a="left" style="--d:.4s;left:128px;top:300px;width:1000px">
     <h3><span data-icon="map"></span>Datu avoti kartē</h3>
-    <div class="src-item"><b>LVĢMC laika brīdinājumi <i>repo</i></b><a href="https://bridinajumi.meteo.lv/" target="_blank" rel="noopener">bridinajumi.meteo.lv</a></div>
+    <div class="src-item"><b>LVĢMC laika brīdinājumi</b><a href="https://bridinajumi.meteo.lv/" target="_blank" rel="noopener">bridinajumi.meteo.lv</a></div>
     <div class="src-item"><b>LVĢMC prognozes apdzīvotām vietām</b><a href="https://data.gov.lv/dati/lv/dataset/meteorologiskas-prognozes-apdzivotam-vietam-jaunaka-datu-kopa" target="_blank" rel="noopener">data.gov.lv</a></div>
-    <div class="src-item"><b>LVĢMC hidroloģiskās prognozes <i>repo</i></b><a href="https://data.gov.lv/dati/lv/dataset/hidrologiskas-prognozes" target="_blank" rel="noopener">data.gov.lv</a></div>
-    <div class="src-item"><b>Ceļu notikumi un stāvoklis (LVC, NAP) <i>repo</i></b><a href="https://map.transportdata.gov.lv/" target="_blank" rel="noopener">transportdata.gov.lv</a></div>
-    <div class="src-item"><b>Patvertnes (VUGD) <i>repo</i></b><a href="https://www.112.lv/lv/patvertnes" target="_blank" rel="noopener">112.lv/lv/patvertnes</a></div>
-    <div class="src-item"><b>Krīzes bankomāti (Latvijas Banka) <i>repo</i></b><a href="https://www.bank.lv/pakalpojumi/bankomatu-karte" target="_blank" rel="noopener">bank.lv</a></div>
-    <div class="src-item"><b>Degvielas uzpildes stacijas <i>repo</i></b><a href="https://viss.lv/karte?product=degvielas_uzpildes_stacijas" target="_blank" rel="noopener">viss.lv</a></div>
+    <div class="src-item"><b>Ceļu notikumi un stāvoklis (LVC, NAP)</b><a href="https://map.transportdata.gov.lv/" target="_blank" rel="noopener">transportdata.gov.lv</a></div>
+    <div class="src-item"><b>Patvertnes (VUGD)</b><a href="https://www.112.lv/lv/patvertnes" target="_blank" rel="noopener">112.lv/lv/patvertnes</a></div>
+    <div class="src-item"><b>Krīzes bankomāti (Latvijas Banka)</b><a href="https://www.bank.lv/pakalpojumi/bankomatu-karte" target="_blank" rel="noopener">bank.lv</a></div>
+    <div class="src-item"><b>Degvielas uzpildes stacijas</b><a href="https://viss.lv/karte?product=degvielas_uzpildes_stacijas" target="_blank" rel="noopener">viss.lv</a></div>
     <div class="src-item"><b>Iedzīvotāju ziņojumi</b><span>Krīzes kartes lietotāji</span></div>
   </div>
   <div class="abs card src-col" data-a="right" style="--d:.6s;left:1176px;top:300px;width:616px">
@@ -410,7 +415,6 @@ h2 { font-size: 76px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.0
     <div class="src-item"><b>Rīcības ieteikumi PDF</b><a href="https://www.72stundas.lv/" target="_blank" rel="noopener">72stundas.lv, 112.lv</a></div>
     <div class="src-item"><b>Programmatūra</b><span>Leaflet, Node.js, Express, PDFKit, Noto Sans, Manrope</span></div>
   </div>
-  <p data-a="fade" style="--d:.9s;position:absolute;left:128px;top:968px;width:1664px;font-size:24px;color:var(--muted)"><i class="tag">repo</i> — avots no GitHub repozitorija saraksta. Nav pievienoti: ceļu meteostaciju mērījumi un satiksmes plūsma (NAP) — tiem nepieciešams reģistrēts NAP konts.</p>
 </section>
 
 </div>
